@@ -70,6 +70,8 @@ const initialState = {
     error: null,
     loading: false,
     isUserExist: null,
+    avatarUpdateError: null,
+    profileUpdateError: null,
 };
 
 const userSlice = createSlice({
@@ -135,32 +137,33 @@ const userSlice = createSlice({
 
             // reducers for updateUserProfile action
             .addCase(updateUserProfile.pending, (state) => {
-                state.error = null;
                 state.loading = true;
+                state.profileUpdateError = null;
             })
             .addCase(updateUserProfile.fulfilled, (state, action) => {
-                state.error = null;
                 state.loading = false;
                 state.user = action.payload;
+                state.profileUpdateError = null;
             })
             .addCase(updateUserProfile.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.profileUpdateError = action.payload;
             })
 
             // reducers for updateUserAvatar action
             .addCase(updateUserAvatar.pending, (state) => {
-                state.error = null;
+                state.avatarUpdateError = null;
                 state.loading = true;
             })
             .addCase(updateUserAvatar.fulfilled, (state, action) => {
-                state.error = null;
                 state.loading = false;
                 state.user = action.payload;
+                state.avatarUpdateError = null;
             })
             .addCase(updateUserAvatar.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+                state.avatarUpdateError = action.payload;
             })
 
             // reducer for logout action
