@@ -7,8 +7,6 @@ import router from './routes';
 import { store } from './store'
 import Loader from './components/Loader';
 
-import "./styles/globals.scss"
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

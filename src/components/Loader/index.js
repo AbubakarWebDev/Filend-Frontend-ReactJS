@@ -1,9 +1,12 @@
 import React from 'react';
 import { HashLoader } from "react-spinners";
 
+import styles from "./style.module.scss";
+const { loaderContainer } = styles;
+
 function Loader() {
   return (
-    <div className="fixed-top d-flex justify-content-center zindex-tooltip align-items-center bg-white w-100 vh-100">
+    <div className={loaderContainer}>
       <HashLoader size={80} />
     </div>
   );

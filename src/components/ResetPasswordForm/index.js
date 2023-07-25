@@ -8,7 +8,7 @@ import { useForm, } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, useParams } from "react-router-dom";
 
-import Loader from './../Loader';
+import Loader from '../Loader';
 import RequestLoader from './../RequestLoader';
 import { resetPassword, authActions } from '../../store/slices/authSlice';
 import { checkUserExist, userActions } from '../../store/slices/userSlice';

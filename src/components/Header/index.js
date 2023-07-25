@@ -12,7 +12,7 @@ import { homePageActions } from "../../store/slices/homePageSlice";
 import styles from "./style.module.scss";
 const { avatarImg, navbar } = styles;
 
-function Header() {
+function Header({ profile }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -26,16 +26,18 @@ function Header() {
     <>
       <nav className={`navbar bg-white ${navbar}`}>
         <div className="container-fluid">
-          <button
-            onClick={() => dispatch(homePageActions.setSearchUserSidebar(true))}
-            className="border-0  mb-4 p-0 bg-transparent fw-bold d-flex align-items-center "
-          >
-            <FaSearch className="me-2 " />
-            <span className="fs-5">Find Friends</span>
-          </button>
+          {!profile && (
+            <button
+              onClick={() => dispatch(homePageActions.setSearchUserSidebar(true))}
+              className="border-0 p-0 bg-transparent fw-bold d-flex align-items-center "
+            >
+              <FaSearch className="me-2 " />
+              <span className="fs-5">Find Friends</span>
+            </button>
+          )}
 
           <Link
-            className="text-decoration-none text-dark fs-4 fw-bold mb-4"
+            className="text-decoration-none text-dark fs-4 fw-bold"
             to="/"
           >
             Chat Me Up
@@ -49,7 +51,7 @@ function Header() {
                 <img
                   alt="User Profile"
                   className={`rounded-circle border mr-2 ${avatarImg}`}
-                  src={`${import.meta.env.VITE_SERVER_BASE_URL}/${user?.avatar}`}
+                  src={`${import.meta.env.VITE_SERVER_BASE_URL}/${user.avatar}`}
                 />
               }
             >

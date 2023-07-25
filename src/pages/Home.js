@@ -1,19 +1,18 @@
-import React from 'react';
+import Hero from "../components/Hero";
+import Benifits from "../components/Benifits";
+import Features from "../components/Features";
+import HowItWorks from "../components/HowItWorks";
+import Services from "../components/ServicesSection";
 
-import Header from '../components/Header';
-import ChatContainer from '../components/ChatContainer';
-import SearchUserSidebar from '../components/SearchUserSidebar';
-
-function Home() {  
+const Home = () => {
   return (
     <>
-      <Header />
-
-      <ChatContainer />
-
-      <SearchUserSidebar />
+      <Hero />
+      <HowItWorks />
+      <Services />
+      <Features />
+      <Benifits />
     </>
-  )
-}
-
+  );
+};
 export default Home;

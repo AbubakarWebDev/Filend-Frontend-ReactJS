@@ -7,7 +7,6 @@ import Modal from "../components/Modal";
 import VideoNav from "../components/VideoNav";
 
 import HomePageGraphic from "../assets/images/animation.gif";
-import "../styles/index.css";
 
 const Home = () => {
   const [roomId, setRoomId] = useState("");

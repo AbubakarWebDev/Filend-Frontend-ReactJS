@@ -7,11 +7,11 @@ const Modal = ({ showModal, setShowModal, roomId }) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/room/${roomId}`);
+    navigate(`/video-meeting/room/${roomId}`);
   };
 
   const handleCopy = () => {
-    const url = `http://localhost:5173/room/${roomId}`;
+    const url = `http://localhost:5173/video-meeting/room/${roomId}`;
     handleCopyToClipboard(url);
 
     console.log("URL copied to clipboard:", url);
@@ -49,7 +49,7 @@ const Modal = ({ showModal, setShowModal, roomId }) => {
             type="text"
             readOnly
             className=" bg-gray-200 px-8 py-3 rounded-md w-full"
-            value={`http://localhost:5173/room/${roomId}`}
+            value={`http://localhost:5173/video-meeting/room/${roomId}`}
           />
           <div className="group  -ml-14 relative flex justify-cente">
             <button
@@ -67,4 +67,5 @@ const Modal = ({ showModal, setShowModal, roomId }) => {
     </aside>
   );
 };
+
 export default Modal;
