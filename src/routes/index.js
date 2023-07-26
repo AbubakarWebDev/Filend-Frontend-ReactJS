@@ -10,7 +10,7 @@ import Signup from "../pages/Signup";
 import Profile from "../pages/Profile";
 import ChatApp from "../pages/ChatApp";
 import Error404 from "../pages/Error404";
-import VideoHome from "../pages/VideoHome";
+import VideoMeeting from "../pages/VideoMeeting";
 import ResetPassword from "../pages/ResetPassword";
 import ForgotPassword from "../pages/ForgotPassword";
 
@@ -23,7 +23,9 @@ import BootstrapLoader from "../components/BootstrapLoader";
 const router = createBrowserRouter([
   {
     path: "/",
+    id: "root",
     element: <App />,
+    loader: privateRoutesLoader,
     children: [
       {
         element: <TailwindLoader />,
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/video-meeting",
-            element: <VideoHome />,
+            element: <VideoMeeting />,
           },
           {
             path: "/video-meeting/room/:roomId",
@@ -50,7 +52,6 @@ const router = createBrowserRouter([
         element: <BootstrapLoader />,
         children: [
           {
-            loader: privateRoutesLoader,
             element: <PrivateRoutes protect={false} />,
             children: [
               {
@@ -68,7 +69,6 @@ const router = createBrowserRouter([
             ],
           },
           {
-            loader: privateRoutesLoader,
             element: <PrivateRoutes protect={true} />,
             children: [
               {

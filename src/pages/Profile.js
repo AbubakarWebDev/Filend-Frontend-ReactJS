@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 
-import Header from "../components/Header";
+import SiteLayout from "../layouts/SiteLayout";
 import ProfileForm from "../components/ProfileForm";
 import ProfilePictureCard from "../components/ProfilePictureCard";
 
@@ -11,8 +11,6 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Header profile={true} />
-
       <Row className="p-4 mx-0">
         <Col xl={4} className="ps-xl-0">
           <ProfilePictureCard avatar={`${import.meta.env.VITE_SERVER_BASE_URL}/${user.avatar}`} />
@@ -25,4 +23,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default SiteLayout(ProfilePage);

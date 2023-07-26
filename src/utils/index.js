@@ -119,6 +119,21 @@ const handleCopyToClipboard = (text) => {
   document.body.removeChild(textarea);
 };
 
+function isStringIncludedInAnyAttribute(element, searchString) {
+  const attributes = element.attributes;
+
+  for (let i = 0; i < attributes.length; i++) {
+    const attribute = attributes[i];
+    const attributeValue = attribute.value;
+
+    if (attributeValue.includes(searchString)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export {
   convertToMultipartFormData,
   isEqualArrayOfObject,
@@ -131,4 +146,5 @@ export {
   elipsis,
   findArrayDiff,
   handleCopyToClipboard,
+  isStringIncludedInAnyAttribute,
 };

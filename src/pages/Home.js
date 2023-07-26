@@ -3,6 +3,7 @@ import Benifits from "../components/Benifits";
 import Features from "../components/Features";
 import HowItWorks from "../components/HowItWorks";
 import Services from "../components/ServicesSection";
+import SiteLayout from "../layouts/SiteLayout";
 
 const Home = () => {
   return (
@@ -15,4 +16,4 @@ const Home = () => {
     </>
   );
 };
-export default Home;
+export default SiteLayout(Home);

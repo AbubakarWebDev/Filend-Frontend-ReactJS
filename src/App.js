@@ -5,6 +5,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { authActions } from './store/slices/authSlice';
 import { getLoggedInUser } from './store/slices/userSlice';
 
+import "./styles/_fonts.scss"
+
 function App() {
     const navigate = useNavigate();
     const dispatch = useDispatch();

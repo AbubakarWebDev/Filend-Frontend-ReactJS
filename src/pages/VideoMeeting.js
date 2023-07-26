@@ -7,8 +7,9 @@ import Modal from "../components/Modal";
 import VideoNav from "../components/VideoNav";
 
 import HomePageGraphic from "../assets/images/animation.gif";
+import SiteLayout from "../layouts/SiteLayout";
 
-const Home = () => {
+const VideoMeeting = () => {
   const [roomId, setRoomId] = useState("");
   const [showModal, setShowModal] = useState(false);
 
@@ -87,4 +88,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SiteLayout(VideoMeeting);

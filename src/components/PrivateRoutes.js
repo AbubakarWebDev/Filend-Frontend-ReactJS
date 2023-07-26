@@ -1,8 +1,8 @@
 import React from 'react';
-import { Navigate, Outlet, useLoaderData } from 'react-router-dom';
+import { Navigate, Outlet, useRouteLoaderData } from 'react-router-dom';
 
 function PrivateRoutes({ protect }) {
-  const { isUserLoggedIn } = useLoaderData();
+  const { isUserLoggedIn } = useRouteLoaderData("root");
 
   if (protect) {
     return isUserLoggedIn ? <Outlet /> : <Navigate to='/login' />

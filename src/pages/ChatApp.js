@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Header from '../components/Header';
+import SiteLayout from '../layouts/SiteLayout';
 import ChatContainer from '../components/ChatContainer';
 import SearchUserSidebar from '../components/SearchUserSidebar';
 
-function Home() {  
+function ChatApp() {  
   return (
     <>
-      <Header />
-
       <ChatContainer />
 
       <SearchUserSidebar />
@@ -16,4 +14,4 @@ function Home() {
   )
 }
 
-export default Home;
+export default SiteLayout(ChatApp);
