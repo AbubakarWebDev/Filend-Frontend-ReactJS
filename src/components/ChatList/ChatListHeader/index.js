@@ -7,14 +7,14 @@ import { useDispatch } from 'react-redux';
 import { homePageActions } from '../../../store/slices/homePageSlice';
 
 import styles from './style.module.scss';
-const { chatListHeader, toggleBtn } = styles;
+const { chatListHeader, toggleBtn, btnContainer } = styles;
 
 function ChatListHeader({ handleClick }) {
     const dispatch = useDispatch();
 
     return (
         <div className={chatListHeader}>
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="w-100 d-flex justify-content-between align-items-center">
                 <h4>My Chats</h4>
 
                 <button
@@ -25,13 +25,13 @@ function ChatListHeader({ handleClick }) {
                 </button>
             </div>
 
-            <div className="d-flex">
+            <div className={`w-100 d-flex justify-content-between align-items-center ${btnContainer}`}>
                 <button
                     type="button"
                     className="btn btn-dark d-flex align-items-center me-2"
                     onClick={() => dispatch(homePageActions.setSearchUserSidebar(true))}
                 >
-                    <span className="me-2">Find Friends</span>
+                    <span className="me-2 text-nowrap">Find Friends</span>
                     <FaSearch />
                 </button>
 
@@ -40,7 +40,7 @@ function ChatListHeader({ handleClick }) {
                     onClick={handleClick}
                     className="btn btn-dark d-flex align-items-center"
                 >
-                    <span className="me-2">New Group Chat</span>
+                    <span className="me-2 text-nowrap">New Group Chat</span>
                     <HiPlusCircle />
                 </button>
             </div>
