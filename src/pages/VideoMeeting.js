@@ -19,7 +19,7 @@ const VideoMeeting = () => {
   };
 
   return (
-    <div className="bg-gray-200">
+    <div className="bg-gradient-to-r from-purple-200 via-purple-400 to-purple-800">
       {showModal && (
         <Modal
           showModal={showModal}
@@ -29,7 +29,7 @@ const VideoMeeting = () => {
       )}
 
       <VideoNav />
-      
+
       <div className="gap-16 py-10 md:h-full md:pb-0 ">
         <div className="md:flex mx-auto  w-[90%] items-center justify-center md:h-5/6">
           <div className=" mt-10 md:basis-3/4">
@@ -56,7 +56,7 @@ const VideoMeeting = () => {
                       className=" text-xl pl-16 py-3 rounded-md border border-gray-700"
                       onChange={(e) => setRoomId(e.target.value)}
                     />
-                    
+
                     <span className="absolute left-5 top-1/2 transform -translate-y-1/2">
                       <BsFillKeyboardFill size={30} />
                     </span>
@@ -77,10 +77,7 @@ const VideoMeeting = () => {
           </div>
 
           <div className="flex basis-3/5 justify-center align-top md:z-10 md:ml-40 md:mt-16 md:justify-items-end">
-            <img
-              src={HomePageGraphic}
-              alt="Home-Page-Graphic"
-            />
+            <img src={HomePageGraphic} alt="Home-Page-Graphic" />
           </div>
         </div>
       </div>

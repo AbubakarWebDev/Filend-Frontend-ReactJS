@@ -1,6 +1,8 @@
 import { MdOutlineSlowMotionVideo } from "react-icons/md";
-import { BiFileBlank, BiMessage } from "react-icons/bi";
+import { BiFileBlank, BiMessage, BiVideo, BiShareAlt } from "react-icons/bi";
+import { BsFillChatDotsFill } from "react-icons/bs";
 import ServiceItem from "../ServiceItem";
+import { Link } from "react-router-dom";
 
 const ServicesSection = () => {
   const data = [
@@ -25,7 +27,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <div className="pt-10 pb-5 lg:pt-[120px] lg:pb-[90px] bg-gray-secondry">
+    <div className="pb-5 lg:pb-[90px] bg-gray-secondry mt-7">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
@@ -36,10 +38,63 @@ const ServicesSection = () => {
             </div>
           </div>
         </div>
-        <div className="-mx-4 flex flex-wrap">
-          {data.map((item) => (
-            <ServiceItem key={item.id} {...item} />
-          ))}
+        <div className="grid grid-cols-3">
+          <div className="col-span-1">
+            <div className="w-full px-4  text-center">
+              <div className="mb-4 rounded-[20px] bg-white grid justify-center p-10 btn  w-fit h-fit hover:shadow-[0_4px_0px_rgba(8,_112,_184,_0.7)] text-black backdrop-blur-sm bg-white/30 ease-out hover:translate-y-1 transition-all  md:px-7 xl:px-10">
+                <div className="flex justify-center">
+                  <div className="bg-[#E18A07]  mb-8 flex justify-center h-[70px] w-[70px] items-center  rounded-2xl hover:bg-btn-secondry">
+                    <BiShareAlt size={30} color="white" />
+                  </div>
+                </div>
+                <h4 className="text-dark mb-3 text-xl font-semibold">
+                  File Sharing
+                </h4>
+                <p className="text-body-color">
+                  Effortlessly share files of any size with others through
+                  secure and reliable links.
+                </p>
+              </div>
+            </div>
+          </div>
+          <Link to="/video-meeting">
+            <div className="col-span-1">
+              <div className="w-full px-4  text-center">
+                <div className="mb-4 rounded-[20px] bg-white grid justify-center p-10 btn  w-fit h-fit hover:shadow-[0_4px_0px_rgba(8,_112,_184,_0.7)] text-black backdrop-blur-sm bg-white/30 ease-out hover:translate-y-1 transition-all  md:px-7 xl:px-10">
+                  <div className="flex justify-center">
+                    <div className="bg-[#E18A07]  mb-8 flex justify-center h-[70px] w-[70px] items-center  rounded-2xl hover:bg-btn-secondry">
+                      <BiVideo size={50} color="white" />
+                    </div>
+                  </div>
+                  <h4 className="text-dark mb-3 text-xl font-semibold">
+                    Video Meeting
+                  </h4>
+                  <p className="text-body-color">
+                    Conduct video conferences with seamless audio and video
+                    quality for effective collaboration.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Link>
+          <Link to="/chat">
+            <div className="col-span-1">
+              <div className="w-full px-4  text-center">
+                <div className="mb-4 rounded-[20px] bg-white grid justify-center p-10 btn  w-fit h-fit hover:shadow-[0_4px_0px_rgba(8,_112,_184,_0.7)] text-black backdrop-blur-sm bg-white/30 ease-out hover:translate-y-1 transition-all  md:px-7 xl:px-10">
+                  <div className="flex justify-center">
+                    <div className="bg-[#E18A07]  mb-8 flex justify-center h-[70px] w-[70px] items-center  rounded-2xl hover:bg-btn-secondry">
+                      <BsFillChatDotsFill size={30} color="white" />
+                    </div>
+                  </div>
+                  <h4 className="text-dark mb-3 text-xl font-semibold">Chat</h4>
+                  <p className="text-body-color">
+                    Stay connected and chat with your team members in a secure
+                    and real-time environment.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

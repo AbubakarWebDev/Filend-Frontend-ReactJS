@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { NavDropdown } from "react-bootstrap";
@@ -9,7 +9,8 @@ import { authActions } from "../../store/slices/authSlice";
 import { homePageActions } from "../../store/slices/homePageSlice";
 
 import styles from "./style.module.scss";
-const { header, appName, menuItems, userDropdown, userDropdownList, loginBtn } = styles;
+const { header, appName, menuItems, userDropdown, userDropdownList, loginBtn } =
+  styles;
 
 function MainHeader() {
   const navigate = useNavigate();
@@ -24,8 +25,6 @@ function MainHeader() {
 
   return (
     <div className={header}>
-      <p className={appName}> Filend </p>
-
       <div className={menuItems}>
         <Link to="/">Filend</Link>
         <Link to="/chat">Chat Me Up</Link>
@@ -33,19 +32,33 @@ function MainHeader() {
       </div>
 
       {user ? (
-        <div className={userDropdown} onClick={() => setDropdown((prev) => !prev)}>
-          <img alt="User Profile" src="http://localhost:3000/uploads/avatar-3-1690299883665.png" />
+        <div
+          className={userDropdown}
+          onClick={() => setDropdown((prev) => !prev)}
+        >
+          <img
+            alt="User Profile"
+            src="http://localhost:3000/uploads/avatar-3-1690299883665.png"
+          />
           <BiSolidDownArrow />
 
           {dropdown && (
             <div className={userDropdownList}>
               <Link to="/profile">Profile</Link>
-              <button type="button" onClick={handleLogout}>Logout</button>
+              <button type="button" onClick={handleLogout}>
+                Logout
+              </button>
             </div>
           )}
         </div>
       ) : (
-        <button className={loginBtn} type="button" onClick={() => navigate('/login')}>Login</button>
+        <button
+          className={loginBtn}
+          type="button"
+          onClick={() => navigate("/login")}
+        >
+          Login
+        </button>
       )}
     </div>
   );
