@@ -38,7 +38,7 @@ function MainHeader() {
         >
           <img
             alt="User Profile"
-            src="http://localhost:3000/uploads/avatar-3-1690299883665.png"
+            src={`${import.meta.env.VITE_SERVER_BASE_URL}/${user.avatar}`}
           />
           <BiSolidDownArrow />
 
