@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Carousel } from 'react-responsive-carousel';
 
 import Peer from "simple-peer";
 import { v1 as uuid } from "uuid";
@@ -8,6 +9,7 @@ import UploadFile from "../UploadFile";
 import FileProgress from './../FileProgress';
 
 import { webRTCSocket as socket } from "../../socket";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const SenderFileContainer = () => {
   const peerRef = useRef();
@@ -116,9 +118,13 @@ const SenderFileContainer = () => {
     });
 
     function onReceiving_SDP_Answer(payload) {
+      console.log("Receiving SDP", payload);
+
       peerRef.current.signal(payload.signal);
 
       peerRef.current.on('connect', () => {
+        console.log('Connected to peer!');
+
         setProgressPercentage((prev) => {
           return {
             ...prev,
@@ -164,9 +170,15 @@ const SenderFileContainer = () => {
   if (Object.values(progressPercentage).length > 0) {
     return (
       <div className="p-5 lg:w-2/5 min-h-[320px] flex text-center items-center justify-center rounded-md bg-white shadow-md">
-        {Object.values(progressPercentage).map((percentage, index) => (
-          <FileProgress key={index} percentage={percentage.toFixed()} />
-        ))}
+        {(Object.values(progressPercentage).length > 1) ? (
+          <Carousel showIndicators={true}>
+            {Object.values(progressPercentage).map((percentage, index) => (
+              <FileProgress key={index} percentage={percentage.toFixed()} />
+            ))}
+          </Carousel>
+        ) : (
+          <FileProgress percentage={Object.values(progressPercentage)[0].toFixed()} />
+        )}
       </div>
     );
   }

@@ -1,6 +1,7 @@
+import jwt_decode from "jwt-decode";
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { authActions } from "./authSlice";
+import { authActions, login } from "./authSlice";
 import { handleAPIError } from '../../services/api.service';
 import {
     currentUser, 
@@ -166,8 +167,13 @@ const userSlice = createSlice({
                 state.avatarUpdateError = action.payload;
             })
 
+            .addCase(login.fulfilled, (state, action) => {
+                const user = jwt_decode(action.payload.result.token);
+                state.user = user;
+            })
+
             // reducer for logout action
-            .addCase(authActions.logout, (state, action) => {
+            .addCase(authActions.logout, (state) => {
                 state.user = null;
             });
     },

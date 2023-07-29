@@ -48,7 +48,7 @@ const BootstrapLoader = () => {
     }
 
     // Import the necessary CSS file dynamically
-    import(`../styles/${styleSheetName}.scss`)
+    import("../styles/globals.scss")
       .then((cssModule) => {
         createStyleSheet(styleSheetName, cssModule, () => {
           setIsLoaded(true);

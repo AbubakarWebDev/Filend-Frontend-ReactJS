@@ -56,6 +56,7 @@ const router = createBrowserRouter([
         element: <BootstrapLoader />,
         children: [
           {
+            loader: privateRoutesLoader,
             element: <PrivateRoutes protect={false} />,
             children: [
               {
@@ -73,6 +74,7 @@ const router = createBrowserRouter([
             ],
           },
           {
+            loader: privateRoutesLoader,
             element: <PrivateRoutes protect={true} />,
             children: [
               {

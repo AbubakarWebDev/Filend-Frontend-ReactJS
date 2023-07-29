@@ -48,7 +48,7 @@ const TailwindLoader = () => {
     }
 
     // Import the necessary CSS file dynamically
-    import(`../styles/${styleSheetName}.scss`)
+    import("../styles/tailwind.scss")
       .then((cssModule) => {
         createStyleSheet(styleSheetName, cssModule, () => {
           setIsLoaded(true);

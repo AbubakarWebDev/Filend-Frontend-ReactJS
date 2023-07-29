@@ -75,18 +75,22 @@ const ReceiverFileContainer = ({ roomID }) => {
     socket.emit("join_room", { roomID, init: false });
 
     function onReceiving_SDP_offer(payload) {
+      console.log("Receiving SDP Offer", payload);
       peerRef.current = addPeer(payload.signal, payload.callerID);
 
       peerRef.current.on('connect', () => {
+        console.log('Connected to peer!');
         setConnection(true);
       });
 
       peerRef.current.on('close', () => {
+        console.log('Disconnected to peer!');
         setConnection(false);
       });
 
       peerRef.current.on('error', (err) => {
         if (err.code === 'ERR_CONNECTION_FAILURE') {
+          console.log('Disconnected to peer!');
           setConnection(false);
         }
 
@@ -120,9 +124,6 @@ const ReceiverFileContainer = ({ roomID }) => {
     }
   }, []);
 
-
-  //   Sender has stopped sharing
-  // The sender has either closed this transfer or is now offline. Please check if the sender has an active internet connection or ask for a new link.
 
   return (
     <div className="p-5 lg:w-2/5 min-h-[320px] flex text-center items-center justify-center rounded-md bg-white shadow-md">
