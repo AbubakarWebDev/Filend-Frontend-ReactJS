@@ -2,7 +2,7 @@ import { produce } from "immer";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useRef, useState } from 'react';
 
-import socket from "../../socket";
+import { chatSocket as socket } from "../../socket";
 import ChatListItem from "./ChatListItem";
 import RequestLoader from './../RequestLoader';
 import CreateGroupChatModal from './../CreateGroupChatModal';

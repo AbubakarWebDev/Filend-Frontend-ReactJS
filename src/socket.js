@@ -1,6 +1,8 @@
 import { io } from 'socket.io-client';
 
 const socket = io(import.meta.env.VITE_SERVER_BASE_URL);
+const chatSocket = io(`${import.meta.env.VITE_SERVER_BASE_URL}/chat`);
+const webRTCSocket = io(`${import.meta.env.VITE_SERVER_BASE_URL}/webRTC`);
 
 function emit(socket, event, arg) {
     socket.timeout(2000).emit(event, arg, (err) => {
@@ -16,7 +18,9 @@ socket.on("connect_error", (err) => {
 });
 
 export {
-    emit
+    emit,
+    chatSocket,
+    webRTCSocket
 };
 
 export default socket;

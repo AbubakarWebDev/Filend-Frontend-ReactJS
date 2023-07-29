@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { IoMdSend } from "react-icons/io";
 import { useDispatch } from "react-redux";
 
-import socket from "../../../socket";
+import { chatSocket as socket } from "../../../socket";
 import Typing from "../Typing";
 import { capatalize } from "../../../utils";
 import { sendMessage } from "../../../store/slices/messageSlice";

@@ -3,7 +3,7 @@ import { AiOutlineWechat } from "react-icons/ai";
 import { FiArrowLeft } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 
-import socket from "../../socket";
+import { chatSocket as socket } from "../../socket";
 import ChatInput from "./ChatInput";
 import ChatHeader from "./ChatHeader";
 import ChatMessageList from "./ChatMessageList";

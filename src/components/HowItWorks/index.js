@@ -28,17 +28,19 @@ const HowItWorks = () => {
             <div>
               <img src="/arrow.svg" />
             </div>
-            <p className="text-black font-normal text-base  border-dashed border p-5">
-              Our file sharing system simplifies the process with ease. Select
-              your desired file, and our system will generate a secure and
-              unique link for it. Share this link effortlessly on various
-              platforms, allowing recipients to access and download the file
-              with just a click. Enjoy fast, reliable downloads, and rest
-              assured that your data is safe with top-notch encryption. There is
-              no need to worry about link expirations, as the shared links
-              remain accessible indefinitely. Experience seamless collaboration
-              and efficient file sharing with our user-friendly platform today.
-              <ol className="text-base font-medium mt-4">
+            <div className="border-dashed border p-5">
+              <p className="text-black font-normal text-base">
+                Our file sharing system simplifies the process with ease. Select
+                your desired file, and our system will generate a secure and
+                unique link for it. Share this link effortlessly on various
+                platforms, allowing recipients to access and download the file
+                with just a click. Enjoy fast, reliable downloads, and rest
+                assured that your data is safe with top-notch encryption. There is
+                no need to worry about link expirations, as the shared links
+                remain accessible indefinitely. Experience seamless collaboration
+                and efficient file sharing with our user-friendly platform today.
+              </p>
+              <ul className="text-base font-medium mt-4">
                 <li className="my-2">
                   <span className="font-bold">STEP 1 -</span>
                   Choose file you want to share.
@@ -55,8 +57,8 @@ const HowItWorks = () => {
                   <span className="font-bold">STEP 4 -</span>
                   Share this link with anyone.
                 </li>
-              </ol>
-            </p>
+              </ul>
+            </div>
           </div>
         </div>
         <div className="xs:hidden md:visible md:col-span-1">

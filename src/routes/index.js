@@ -35,6 +35,10 @@ const router = createBrowserRouter([
             element: <Home />,
           },
           {
+            path: "/room/:roomID",
+            element: <Home />,
+          },
+          {
             path: "/video-meeting",
             element: <VideoMeeting />,
           },

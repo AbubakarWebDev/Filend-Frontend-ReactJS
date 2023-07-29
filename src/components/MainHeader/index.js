@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
-import { NavDropdown } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { authActions } from "../../store/slices/authSlice";
-import { homePageActions } from "../../store/slices/homePageSlice";
 
 import styles from "./style.module.scss";
-const { header, appName, menuItems, userDropdown, userDropdownList, loginBtn } =
-  styles;
+const { header, menuItems, userDropdown, userDropdownList, loginBtn } = styles;
 
 function MainHeader() {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import socket, { emit } from "../socket";
+import { chatSocket as socket, emit } from "../socket";
 
 const useOnlineStatus = (user) => {
     const [onlineUsers, setOnlineUsers] = useState({});

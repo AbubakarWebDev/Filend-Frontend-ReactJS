@@ -1,63 +1,97 @@
+import { useRef } from 'react';
 import QRCode from "react-qr-code";
-import { HiOutlineClipboard, HiOutlineX, HiBadgeCheck } from "react-icons/hi";
+import { HiOutlineClipboard, HiBadgeCheck } from "react-icons/hi";
+import { RiCloseCircleFill } from "react-icons/ri";
 import {
-  BsFacebook,
-  BsWhatsapp,
-  BsFillChatLeftTextFill,
   BsTwitter,
   BsLinkedin,
+  BsWhatsapp,
+  BsFacebook,
+  BsEnvelopeFill,
+  BsFillChatLeftTextFill,
 } from "react-icons/bs";
 
-const ShareFile = ({ file, handleCopyToClipboard, showToast }) => {
+import styles from "./style.module.scss";
+const { linkInput } = styles;
+
+const ShareFile = ({ file, handleCopyToClipboard, showToast, link }) => {
+  const inputRef = useRef(null);
+
   return (
-    <div className="p-5 flex flex-col  lg:w-2/5  h-full rounded-md bg-white shadow-md ">
-      <div className="flex justify-end mb-6">
-        <HiOutlineX className="cursor-pointer" size={30} />
+    <div
+      className="relative p-5 flex flex-col lg:w-2/5 h-full rounded-md bg-white shadow-md"
+    >
+      <div className="absolute -right-4 -top-4 bg-white w-9 h-9 rounded-full border border-gray-700 p-0 m-0">
+        <RiCloseCircleFill className="cursor-pointer w-full h-full" />
       </div>
-      <div className="mb-6">
-        <h1 className="text-base font-medium ">{file.name}</h1>
+
+      <div className="mb-2">
+        <h1 className="text-base font-medium">{file.name}</h1>
       </div>
-      <div className="flex justify-between mb-6">
+
+      <div className="flex justify-between mb-4">
         <input
-          type="text"
-          className="w-[80%] border-b-4 border-btn-primary focus:outline-0"
-          value={file.name}
           readOnly
+          type="text"
+          value={link}
+          ref={inputRef}
+          className={`${linkInput} w-11/12 border-b-4 border-btn-primary focus:outline-0`}
         />
+
         <HiOutlineClipboard
-          className="cursor-pointer text-btn-primary"
           size={30}
-          onClick={handleCopyToClipboard}
+          className="cursor-pointer text-btn-primary"
+          onClick={() => handleCopyToClipboard(inputRef.current)}
         />
       </div>
-      <div className="flex mb-6 ">
-        <div>
-          <QRCode value={file.name} />
-        </div>
-        <div className="flex flex-wrap">
-          <BsWhatsapp className="cursor-pointer text-[#28D146] m-4" size={30} />
-          <BsFacebook
-            className="cursor-pointer m-4  text-[#3b5998]"
-            size={30}
-          />
-          <BsFillChatLeftTextFill
-            className="cursor-pointer m-4 text-[#28D146]"
-            size={30}
-          />
-          <BsTwitter className="cursor-pointer m-4  text-[#00acee]" size={30} />
-          <BsLinkedin
-            className="cursor-pointer m-4  text-[#0072b1]"
-            size={30}
-          />
+
+      <div className="flex justify-between items-center">
+        <QRCode className="w-2/5 h-auto" value={link} />
+
+        <div className="w-1/2 flex flex-col">
+          <div className="flex">
+            <BsWhatsapp
+              className="cursor-pointer text-[#28D146] m-4"
+              size={40}
+            />
+
+            <BsFacebook
+              className="cursor-pointer m-4 text-[#3b5998]"
+              size={40}
+            />
+
+            <BsFillChatLeftTextFill
+              className="cursor-pointer m-4 text-[#28D146]"
+              size={40}
+            />
+          </div>
+
+          <div className="flex">
+            <BsTwitter
+              className="cursor-pointer m-4 text-[#00acee]"
+              size={40}
+            />
+
+            <BsEnvelopeFill
+              className="cursor-pointer m-4 text-lime-600"
+              size={40}
+            />
+
+            <BsLinkedin
+              className="cursor-pointer m-4  text-[#0072b1]"
+              size={40}
+            />
+          </div>
         </div>
       </div>
+
       {showToast && (
         <div
-          className="mb-3 inline-flex w-full items-center rounded-lg bg-green-500 px-6 py-5 text-base text-black"
           role="alert"
+          className="mt-4 inline-flex w-full text-white items-center rounded-lg bg-green-500 p-3 text-base"
         >
           <span className="mr-2">
-            <HiBadgeCheck size={20} className="text-white" />
+            <HiBadgeCheck size={20} />
           </span>
           URL Copied - check it out!
         </div>

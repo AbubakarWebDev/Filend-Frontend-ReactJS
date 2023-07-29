@@ -1,0 +1,12 @@
+.linkInput {
+  &::-moz-selection {
+    /* Code for Firefox */
+    color: white;
+    background: #ff3b1c;
+  }
+
+  &::selection {
+    color: white;
+    background: #ff3b1c;
+  }
+}
