@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Peer from "simple-peer";
 import streamSaver from "streamsaver";
 import { ClipLoader } from "react-spinners";
+import { BiSolidError } from "react-icons/bi";
 
 import FileProgress from '../FileProgress';
 
@@ -19,6 +20,7 @@ const ReceiverFileContainer = ({ roomID }) => {
   const [gotFile, setGotFile] = useState(false);
   const [completeFile, setCompleteFile] = useState(false);
   const [connectionEstablished, setConnection] = useState(false);
+  const [invalidConnection, setInvalidConnection] = useState(false);
   const [progressPercentage, setProgressPercentage] = useState(0);
 
   function downloadFile() {
@@ -34,7 +36,8 @@ const ReceiverFileContainer = ({ roomID }) => {
   }
 
   function handleReceivingData(data) {
-    if ((data.length === 23) && data.toString().includes("webRTCFileDone")) {
+    if (data.toString().includes("webRTCFileDone")) {
+      console.log(data);
       setCompleteFile(true);
       downloadFile();
     }
@@ -106,6 +109,10 @@ const ReceiverFileContainer = ({ roomID }) => {
     socket.on("receive_sdp_offer", onReceiving_SDP_offer);
     socket.on("receive_file_MetaData", onReceiving_file_MetaData);
 
+    setTimeout(function () {
+      setInvalidConnection(true);
+    }, 10 * 1000);
+
     return () => {
       peerRef.current?.destroy();
       socket.off("receive_sdp_offer", onReceiving_SDP_offer);
@@ -113,12 +120,28 @@ const ReceiverFileContainer = ({ roomID }) => {
     }
   }, []);
 
+
+  //   Sender has stopped sharing
+  // The sender has either closed this transfer or is now offline. Please check if the sender has an active internet connection or ask for a new link.
+
   return (
-    <>
+    <div className="p-5 lg:w-2/5 min-h-[320px] flex text-center items-center justify-center rounded-md bg-white shadow-md">
       {(connectionEstablished && gotFile) ? (
         <FileProgress percentage={progressPercentage.toFixed()} />
-      ) : <ClipLoader />}
-    </>
+      ) : (invalidConnection && !connectionEstablished) ? (
+        <div className="flex text-center items-center justify-center flex-col">
+          <BiSolidError className="mb-2" size={60} />
+          <h3 className="mb-2 text-2xl font-bold"> Sender has stopped sharing </h3>
+          <p className="mb-2 text-xl font-medium">The sender has either closed this transfer or is now offline. Please check if the sender has an active internet connection or ask for a new link. </p>
+        </div>
+      ) : (
+        <div className="flex text-center items-center justify-center flex-col">
+          <ClipLoader className="mb-2" size={60} />
+          <h3 className="mb-2 text-2xl font-bold"> Connecting to sender </h3>
+          <p className="mb-2 text-xl font-medium"> Trying to establish a connection with the sender </p>
+        </div>
+      )}
+    </div >
   );
 };
 

@@ -54,9 +54,6 @@ function ChatInput({ chatId, messageContainerRef, user }) {
   function startTyping(event) {
     clearTimeout(typingTimoutId.current);
 
-    socket.connect();
-    console.log(socket);
-
     socket.emit("typing", { chatId, user });
 
     if (event.keyCode === 13) {
@@ -67,9 +64,6 @@ function ChatInput({ chatId, messageContainerRef, user }) {
   }
 
   function stopTyping() {
-    socket.connect();
-    console.log(socket);
-
     clearTimeout(typingTimoutId.current);
 
     typingTimoutId.current = setTimeout(function () {

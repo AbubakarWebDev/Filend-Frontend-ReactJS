@@ -163,7 +163,7 @@ const SenderFileContainer = () => {
 
   if (Object.values(progressPercentage).length > 0) {
     return (
-      <div>
+      <div className="p-5 lg:w-2/5 min-h-[320px] flex text-center items-center justify-center rounded-md bg-white shadow-md">
         {Object.values(progressPercentage).map((percentage, index) => (
           <FileProgress key={index} percentage={percentage.toFixed()} />
         ))}
