@@ -10,6 +10,7 @@ import FileProgress from './../FileProgress';
 
 import { webRTCSocket as socket } from "../../socket";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./style.scss"
 
 const SenderFileContainer = () => {
   const peerRef = useRef();
@@ -169,9 +170,9 @@ const SenderFileContainer = () => {
 
   if (Object.values(progressPercentage).length > 0) {
     return (
-      <div className="p-5 lg:w-2/5 min-h-[320px] flex text-center items-center justify-center rounded-md bg-white shadow-md">
+      <div className="p-5 lg:w-2/5 min-h-[330px] flex text-center items-center justify-center rounded-md bg-white shadow-md">
         {(Object.values(progressPercentage).length > 1) ? (
-          <Carousel showIndicators={true}>
+          <Carousel showIndicators={true} showThumbs={false} showStatus={false} showArrows={false}>
             {Object.values(progressPercentage).map((percentage, index) => (
               <FileProgress key={index} percentage={percentage.toFixed()} />
             ))}

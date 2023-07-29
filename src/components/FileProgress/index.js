@@ -7,7 +7,7 @@ import "./style.scss";
 
 function FileProgress({ percentage }) {
   return (
-    <div style={{ width: 250, height: 250 }}>
+    <div style={{ width: 200, height: 200, margin: "0 auto" }}>
       <CircularProgressbar value={percentage} text={`${percentage}%`} />
     </div>
   );

@@ -1,0 +1,11 @@
+.carousel.carousel-slider {
+    overflow: unset !important;
+}
+
+.control-dots {
+    bottom: -50px !important;
+
+    .dot {
+        background: #6b6b6b !important;
+    }
+}
