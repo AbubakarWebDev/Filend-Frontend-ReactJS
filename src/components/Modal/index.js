@@ -11,7 +11,7 @@ const Modal = ({ showModal, setShowModal, roomId }) => {
   };
 
   const handleCopy = () => {
-    const url = `http://localhost:5173/video-meeting/room/${roomId}`;
+    const url = `${import.meta.env.VITE_BASE_URL}/video-meeting/room/${roomId}`;
     handleCopyToClipboard(url);
 
     console.log("URL copied to clipboard:", url);
@@ -49,7 +49,9 @@ const Modal = ({ showModal, setShowModal, roomId }) => {
             type="text"
             readOnly
             className=" bg-gray-200 px-8 py-3 rounded-md w-full"
-            value={`http://localhost:5173/video-meeting/room/${roomId}`}
+            value={`${
+              import.meta.env.VITE_BASE_URL
+            }/video-meeting/room/${roomId}`}
           />
           <div className="group  -ml-14 relative flex justify-cente">
             <button
