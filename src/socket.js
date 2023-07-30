@@ -14,7 +14,6 @@ chatSocket.on("disconnect", () => {
 
 function emit(socket, event, arg) {
     socket.emit(event, arg, (ack) => {
-        console.log(ack);
         if (!ack) {
             // no ack from the server, let's retry
             emit(socket, event, arg);

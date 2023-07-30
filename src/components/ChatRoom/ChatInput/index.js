@@ -72,14 +72,12 @@ function ChatInput({ chatId, messageContainerRef, user }) {
     }
 
     socket.on("startTyping", (data) => {
-      console.log("Start typing");
       if (data.chatId === chatId && data.user._id !== user._id) {
         setTyping(data.user);
       }
     });
 
     socket.on("stopTyping", (data) => {
-      console.log("Stop typing");
       if (data.chatId === chatId && data.user._id !== user._id) {
         setTyping(false);
       }

@@ -124,6 +124,10 @@ var chatSlice = createSlice({
         updateChat: function (state, action) {
             const chatIndex = state.chats.findIndex(chat => chat._id === action.payload._id);
             if (chatIndex !== -1) state.chats[chatIndex] = action.payload;
+
+            if (state.activeChat && (state.activeChat._id === action.payload._id)) {
+                state.activeChat = action.payload;
+            }
         },
 
         deleteChat: function(state, action) {

@@ -5,14 +5,11 @@ const useOnlineStatus = (user) => {
     const [onlineUsers, setOnlineUsers] = useState({});
 
     useEffect(() => {
-        console.log(user);
-
         if (user) {
             emit(socket, "setup", user._id);
         }
 
         const getOnlineUsers = (users) => {
-            console.log(users);
             setOnlineUsers(users);
         }
 

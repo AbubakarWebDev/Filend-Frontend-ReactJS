@@ -16,7 +16,8 @@ import {
     updateGroupAdmins,
     updateGroupUsers,
     renameGroupName,
-    removeUserFromGroup
+    removeUserFromGroup,
+    chatActions
 } from "../../store/slices/chatSlice";
 import { homePageActions } from '../../store/slices/homePageSlice';
 import { getSender, capatalize, isEqualArrayOfObject, findArrayDiff } from '../../utils';
@@ -114,8 +115,24 @@ function ChatRoom({ user, onlineUsers }, ref) {
             const promise = dispatch(removeUserFromGroup(payload));
             controllers.current[3] = promise.abort;
 
-            promise.unwrap().then(() => {
+            promise.unwrap().then((updatedChat) => {
                 setOpenModal(false);
+                dispatch(chatActions.setActiveChat(null));
+
+                const { addedEntries, removedEntries } = findArrayDiff([
+                    ...chat.users, 
+                    ...chat.groupAdmins
+                ], [
+                    ...updatedChat.users, 
+                    ...updatedChat.groupAdmins
+                ]);
+
+                emit(socket, "updateGroupChat", {
+                    userId: user._id,
+                    chat: updatedChat,
+                    addedUser: addedEntries,
+                    removedUser: removedEntries
+                });
             });
         }
     }, [user, chat]);

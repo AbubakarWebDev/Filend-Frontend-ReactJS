@@ -23,7 +23,11 @@ function isValidJson(jsonInput) {
 }
 
 function getSender(currentUser, users) {
-  return users[0]._id === currentUser._id ? users[1] : users[0];
+  if (currentUser && users && users.length >= 2) {
+    return users[0]._id === currentUser._id ? users[1] : users[0];
+  }
+
+  return null;
 }
 
 function capatalize(str) {

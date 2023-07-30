@@ -23,7 +23,7 @@ const { linkInput } = styles;
 
 const ShareFile = ({ file, handleCopyToClipboard, showToast, link }) => {
   const inputRef = useRef(null);
-  console.log(link);
+  
   return (
     <div className="relative p-5 flex flex-col lg:w-2/5 h-full rounded-md bg-white shadow-md">
       <div className="absolute -right-4 -top-4 bg-white w-9 h-9 rounded-full border border-gray-700 p-0 m-0">

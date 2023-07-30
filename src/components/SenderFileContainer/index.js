@@ -119,8 +119,6 @@ const SenderFileContainer = () => {
     });
 
     function onReceiving_SDP_Answer(payload) {
-      console.log("Receiving SDP", payload);
-
       peerRef.current.signal(payload.signal);
 
       peerRef.current.on('connect', () => {

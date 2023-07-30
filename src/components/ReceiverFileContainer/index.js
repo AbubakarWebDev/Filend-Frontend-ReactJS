@@ -37,7 +37,6 @@ const ReceiverFileContainer = ({ roomID }) => {
 
   function handleReceivingData(data) {
     if (data.toString().includes("webRTCFileDone")) {
-      console.log(data);
       setCompleteFile(true);
       downloadFile();
     }
@@ -75,7 +74,6 @@ const ReceiverFileContainer = ({ roomID }) => {
     emit(socket, "join_room", { roomID, init: false });
 
     function onReceiving_SDP_offer(payload) {
-      console.log("Receiving SDP Offer", payload);
       peerRef.current = addPeer(payload.signal, payload.callerID);
 
       peerRef.current.on('connect', () => {

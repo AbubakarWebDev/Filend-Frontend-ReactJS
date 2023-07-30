@@ -13,8 +13,6 @@ const Modal = ({ showModal, setShowModal, roomId }) => {
   const handleCopy = () => {
     const url = `${import.meta.env.VITE_BASE_URL}/video-meeting/room/${roomId}`;
     handleCopyToClipboard(url);
-
-    console.log("URL copied to clipboard:", url);
   };
 
   return (
