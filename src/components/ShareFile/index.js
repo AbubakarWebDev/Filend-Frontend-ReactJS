@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef } from "react";
 import QRCode from "react-qr-code";
 import { HiOutlineClipboard, HiBadgeCheck } from "react-icons/hi";
 import { RiCloseCircleFill } from "react-icons/ri";
@@ -8,19 +8,24 @@ import {
   BsWhatsapp,
   BsFacebook,
   BsEnvelopeFill,
-  BsFillChatLeftTextFill,
+  BsMessenger,
 } from "react-icons/bs";
-
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookMessengerShareButton,
+} from "react-share";
 import styles from "./style.module.scss";
 const { linkInput } = styles;
 
 const ShareFile = ({ file, handleCopyToClipboard, showToast, link }) => {
   const inputRef = useRef(null);
-
+  console.log(link);
   return (
-    <div
-      className="relative p-5 flex flex-col lg:w-2/5 h-full rounded-md bg-white shadow-md"
-    >
+    <div className="relative p-5 flex flex-col lg:w-2/5 h-full rounded-md bg-white shadow-md">
       <div className="absolute -right-4 -top-4 bg-white w-9 h-9 rounded-full border border-gray-700 p-0 m-0">
         <RiCloseCircleFill className="cursor-pointer w-full h-full" />
       </div>
@@ -50,37 +55,48 @@ const ShareFile = ({ file, handleCopyToClipboard, showToast, link }) => {
 
         <div className="w-1/2 flex flex-col">
           <div className="flex">
-            <BsWhatsapp
-              className="cursor-pointer text-[#28D146] m-4"
-              size={40}
-            />
+            <WhatsappShareButton url={link} title={"Filend"} separator=":: ">
+              <BsWhatsapp
+                className="cursor-pointer text-[#28D146] m-4"
+                size={40}
+              />
+            </WhatsappShareButton>
 
-            <BsFacebook
-              className="cursor-pointer m-4 text-[#3b5998]"
-              size={40}
-            />
+            <FacebookShareButton url={link} quote="Filend">
+              <BsFacebook
+                className="cursor-pointer m-4 text-[#3b5998]"
+                size={40}
+              />
+            </FacebookShareButton>
 
-            <BsFillChatLeftTextFill
-              className="cursor-pointer m-4 text-[#28D146]"
-              size={40}
-            />
+            <FacebookMessengerShareButton url={link} appId="521270401588372">
+              <BsMessenger
+                className="cursor-pointer m-4 text-[#0099FF]"
+                size={40}
+              />
+            </FacebookMessengerShareButton>
           </div>
 
           <div className="flex">
-            <BsTwitter
-              className="cursor-pointer m-4 text-[#00acee]"
-              size={40}
-            />
+            <TwitterShareButton url={link} title={"Filend"}>
+              <BsTwitter
+                className="cursor-pointer m-4 text-[#00acee]"
+                size={40}
+              />
+            </TwitterShareButton>
+            <EmailShareButton url={link} title={"Filend"}>
+              <BsEnvelopeFill
+                className="cursor-pointer m-4 text-lime-600"
+                size={40}
+              />
+            </EmailShareButton>
 
-            <BsEnvelopeFill
-              className="cursor-pointer m-4 text-lime-600"
-              size={40}
-            />
-
-            <BsLinkedin
-              className="cursor-pointer m-4  text-[#0072b1]"
-              size={40}
-            />
+            <LinkedinShareButton url={link}>
+              <BsLinkedin
+                className="cursor-pointer m-4  text-[#0072b1]"
+                size={40}
+              />
+            </LinkedinShareButton>
           </div>
         </div>
       </div>
