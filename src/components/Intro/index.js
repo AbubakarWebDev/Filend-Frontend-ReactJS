@@ -16,11 +16,8 @@ const Intro = ({ receiver }) => {
         </p>
 
         <div className="flex">
-          <NavLink
-            to={"/signup"}
-            className="mt-2 p-3 text-base font-bold rounded-md bg-[#E18A07] hover:bg-btn-secondry text-white"
-          >
-            Register Here
+          <NavLink className="p-3 text-base font-bold rounded-md bg-[#E18A07] hover:bg-btn-secondry text-white">
+            Read More
           </NavLink>
         </div>
       </div>

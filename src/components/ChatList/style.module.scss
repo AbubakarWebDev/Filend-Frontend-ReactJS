@@ -2,12 +2,12 @@
   position: relative;
   border-radius: 8px;
   height: 100%;
-  background-color: #E2C7FF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 8px;
+  background-color: #e2c7ff;
+  border: 1px solid #a7a7a7;
+  border-radius: 8px;
 
   .userChatList {
-    height: calc(100% - 70px);
+    height: calc(100% - 106px);
     overflow: auto;
 
     /* width */

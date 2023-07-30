@@ -49,8 +49,8 @@ function MainHeader() {
         </div>
       ) : (
         <button
-          className={loginBtn}
           type="button"
+          className={loginBtn}
           onClick={() => navigate("/login")}
         >
           Login

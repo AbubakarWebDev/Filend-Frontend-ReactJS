@@ -69,6 +69,7 @@ function ChatInput({ chatId, messageContainerRef, user }) {
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
+      inputRef.current.value = "";
     }
 
     socket.on("startTyping", (data) => {
