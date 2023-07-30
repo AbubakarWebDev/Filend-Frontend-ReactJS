@@ -5,21 +5,15 @@ const useOnlineStatus = (user) => {
     const [onlineUsers, setOnlineUsers] = useState({});
 
     useEffect(() => {
-        socket.connect();
+        console.log(user);
 
         if (user) {
             emit(socket, "setup", user._id);
         }
 
         const getOnlineUsers = (users) => {
-            setOnlineUsers((prevState) => {
-                if (JSON.stringify(users) === JSON.stringify(prevState)) {
-                    return prevState;
-                }
-                else {
-                    return users;
-                }
-            });
+            console.log(users);
+            setOnlineUsers(users);
         }
 
         socket.on("onlineUsers", getOnlineUsers);

@@ -8,7 +8,7 @@ import ShareFile from "../ShareFile";
 import UploadFile from "../UploadFile";
 import FileProgress from './../FileProgress';
 
-import { webRTCSocket as socket } from "../../socket";
+import { webRTCSocket as socket, emit } from "../../socket";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./style.scss"
 
@@ -32,7 +32,7 @@ const SenderFileContainer = () => {
     // getting the size of the file
     const totalFileSize = file.size;
 
-    socket.emit('sending_file_MetaData', {
+    emit(socket, 'sending_file_MetaData', {
       userToSignal: callerID,
       callerID: socket.id,
       metaData: {
@@ -93,7 +93,7 @@ const SenderFileContainer = () => {
     });
 
     peer.on("signal", (signal) => {
-      socket.emit("sending_sdp_offer", {
+      emit(socket, "sending_sdp_offer", {
         userToSignal,
         callerID,
         signal,
@@ -111,7 +111,7 @@ const SenderFileContainer = () => {
 
     const roomID = uuid();
 
-    socket.emit("join_room", { roomID, init: true });
+    emit(socket, "join_room", { roomID, init: true });
     setIsLinkGenerated(`${import.meta.env.VITE_BASE_URL}/room/${roomID}`);
 
     socket.on("peer_connected", (peer) => {

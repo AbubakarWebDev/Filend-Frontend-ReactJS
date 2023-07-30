@@ -2,10 +2,11 @@ import React, { useRef, useState, useEffect } from "react";
 import { IoMdSend } from "react-icons/io";
 import { useDispatch } from "react-redux";
 
-import { chatSocket as socket } from "../../../socket";
 import Typing from "../Typing";
 import { capatalize } from "../../../utils";
 import { sendMessage } from "../../../store/slices/messageSlice";
+
+import { chatSocket as socket, emit } from "../../../socket";
 
 import styles from "./style.module.scss";
 const { chatInputContainer } = styles;
@@ -21,14 +22,11 @@ function ChatInput({ chatId, messageContainerRef, user }) {
 
   function scrollChatToBottom() {
     if (messageContainerRef.current) {
-      messageContainerRef.current.scrollTop =
-        messageContainerRef.current.scrollHeight;
+      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
     }
   }
 
   function handleSubmit() {
-    socket.connect();
-
     const payload = {
       chatId: chatId,
       message: chatMessage,
@@ -39,7 +37,7 @@ function ChatInput({ chatId, messageContainerRef, user }) {
       controller.current.abort = promise.abort;
 
       promise.unwrap().then((message) => {
-        socket.emit("sendMessage", message);
+        emit(socket, "sendMessage", message);
 
         scrollChatToBottom();
         setMessage("");
@@ -52,23 +50,20 @@ function ChatInput({ chatId, messageContainerRef, user }) {
   }
 
   function startTyping(event) {
-    clearTimeout(typingTimoutId.current);
-
-    socket.emit("typing", { chatId, user });
-
-    if (event.keyCode === 13) {
-      // 13 is the Enter key code
+    if (event.key !== "Enter") {
+      clearTimeout(typingTimoutId.current);
+      emit(socket, "typing", { chatId, user });
+    }
+    else {
       event.preventDefault();
       handleSubmit();
     }
   }
 
   function stopTyping() {
-    clearTimeout(typingTimoutId.current);
-
-    typingTimoutId.current = setTimeout(function () {
-      socket.emit("typingOff", { chatId, user });
-    }, 600);
+    typingTimoutId.current = setTimeout(() => {
+      emit(socket, "typingOff", { chatId, user });
+    }, 700);
   }
 
   useEffect(() => {
@@ -77,12 +72,14 @@ function ChatInput({ chatId, messageContainerRef, user }) {
     }
 
     socket.on("startTyping", (data) => {
+      console.log("Start typing");
       if (data.chatId === chatId && data.user._id !== user._id) {
         setTyping(data.user);
       }
     });
 
     socket.on("stopTyping", (data) => {
+      console.log("Stop typing");
       if (data.chatId === chatId && data.user._id !== user._id) {
         setTyping(false);
       }
@@ -91,7 +88,7 @@ function ChatInput({ chatId, messageContainerRef, user }) {
     return () => {
       controller.current.abort();
     };
-  }, []);
+  }, [chatId, user._id]);
 
   return (
     <div className={chatInputContainer}>
@@ -106,15 +103,12 @@ function ChatInput({ chatId, messageContainerRef, user }) {
       />
 
       <button onClick={handleSubmit}>
-        {" "}
-        <IoMdSend />{" "}
+        <IoMdSend />
       </button>
 
       {typing && (
         <Typing
-          name={`${capatalize(typing.firstName)} ${capatalize(
-            typing.lastName
-          )}`}
+          name={`${capatalize(typing.firstName)} ${capatalize(typing.lastName)}`}
         />
       )}
     </div>

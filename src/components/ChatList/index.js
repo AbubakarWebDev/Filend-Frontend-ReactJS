@@ -2,7 +2,7 @@ import { produce } from "immer";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useRef, useState } from 'react';
 
-import { chatSocket as socket } from "../../socket";
+import { chatSocket as socket, emit } from "../../socket";
 import ChatListItem from "./ChatListItem";
 import RequestLoader from './../RequestLoader';
 import CreateGroupChatModal from './../CreateGroupChatModal';
@@ -63,13 +63,13 @@ function ChatList({ user, onlineUsers }) {
 
     promise.unwrap().then((chat) => {
       setOpenModal(false);
-      socket.emit("joinNewGroupChat", { chat, userId: user._id });
+      emit(socket, "joinNewGroupChat", { chat, userId: user._id });
     });
   }, [dispatch])
 
   const handleChatClick = useCallback((chat) => {
     dispatch(chatActions.setActiveChat(chat));
-    socket.emit('joinChat', chat._id);
+    emit(socket, 'joinChat', chat._id);
   }, [dispatch]);
 
   const handleHeaderClick = useCallback(() => {

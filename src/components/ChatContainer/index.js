@@ -30,10 +30,7 @@ function ChatContainer() {
     }
 
     useEffect(() => {
-        socket.connect();
-
         const onReceiveMessage = (message) => {
-            console.log();
             dispatch(messageActions.pushMessage({ message, activeChat }));
             requestAnimationFrame(scrollChatToBottom);
         }

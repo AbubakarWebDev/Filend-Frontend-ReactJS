@@ -7,7 +7,7 @@ import { BiSolidError } from "react-icons/bi";
 
 import FileProgress from '../FileProgress';
 
-import { webRTCSocket as socket } from "../../socket";
+import { webRTCSocket as socket, emit } from "../../socket";
 
 const worker = new Worker("/worker.js");
 
@@ -57,7 +57,7 @@ const ReceiverFileContainer = ({ roomID }) => {
     });
 
     peer.on("signal", (signal) => {
-      socket.emit("sending_sdp_answer", {
+      emit(socket, "sending_sdp_answer", {
         signal,
         userToSignal: callerID,
         callerID: socket.id
@@ -72,7 +72,7 @@ const ReceiverFileContainer = ({ roomID }) => {
   }
 
   useEffect(() => {
-    socket.emit("join_room", { roomID, init: false });
+    emit(socket, "join_room", { roomID, init: false });
 
     function onReceiving_SDP_offer(payload) {
       console.log("Receiving SDP Offer", payload);
@@ -102,7 +102,7 @@ const ReceiverFileContainer = ({ roomID }) => {
       fileName.current = payload.metaData.fileName;
       fileSize.current = payload.metaData.fileSize;
 
-      socket.emit("successfully_store_file_MetaData", {
+      emit(socket, "successfully_store_file_MetaData", {
         userToSignal: payload.callerID,
         callerID: socket.id
       });

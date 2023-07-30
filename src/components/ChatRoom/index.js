@@ -3,7 +3,7 @@ import { AiOutlineWechat } from "react-icons/ai";
 import { FiArrowLeft } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 
-import { chatSocket as socket } from "../../socket";
+import { chatSocket as socket, emit } from "../../socket";
 import ChatInput from "./ChatInput";
 import ChatHeader from "./ChatHeader";
 import ChatMessageList from "./ChatMessageList";
@@ -90,7 +90,7 @@ function ChatRoom({ user, onlineUsers }, ref) {
                 ...updatedChat.groupAdmins
             ]);
 
-            socket.emit("updateGroupChat", { 
+            emit(socket, "updateGroupChat", { 
                 userId: user._id,
                 chat: updatedChat,
                 addedUser: addedEntries,
