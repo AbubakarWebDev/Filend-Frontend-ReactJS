@@ -1,4 +1,5 @@
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import pluginRewriteAll from 'vite-plugin-rewrite-all';
 
 import { defineConfig, transformWithEsbuild } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -36,6 +37,8 @@ export default defineConfig({
     }),
 
     react(),
+
+    pluginRewriteAll(),
   ],
 
   optimizeDeps: {
