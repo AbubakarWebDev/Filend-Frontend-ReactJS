@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { authActions } from "../../store/slices/authSlice";
@@ -11,8 +11,11 @@ const { header, menuItems, userDropdown, userDropdownList, loginBtn } = styles;
 function MainHeader() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const user = useSelector((state) => state.user.user);
   const [dropdown, setDropdown] = useState(false);
+
+  console.log(pathname);
 
   function handleLogout() {
     dispatch(authActions.logout());
@@ -20,11 +23,18 @@ function MainHeader() {
   }
 
   return (
-    <div className={header}>
+    <div
+      className={header}
+      style={{
+        background: (pathname === "/" || pathname.includes("/room"))
+          ? "linear-gradient(to right, #a517ba, #5f1782)"
+          : "rgba(227, 202, 254, 0.9)"
+      }}
+    >
       <div className={menuItems}>
-        <Link to="/">Filend</Link>
-        <Link to="/chat">Chat Me Up</Link>
-        <Link to="/video-meeting">Meet Me Up</Link>
+        <Link style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} to="/">Filend</Link>
+        <Link style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} to="/chat">Chat Me Up</Link>
+        <Link style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} to="/video-meeting">Meet Me Up</Link>
       </div>
 
       {user ? (
@@ -36,7 +46,7 @@ function MainHeader() {
             alt="User Profile"
             src={`${import.meta.env.VITE_SERVER_BASE_URL}/${user.avatar}`}
           />
-          <BiSolidDownArrow />
+          <BiSolidDownArrow style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} />
 
           {dropdown && (
             <div className={userDropdownList}>

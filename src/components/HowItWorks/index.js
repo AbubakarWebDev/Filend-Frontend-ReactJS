@@ -28,7 +28,7 @@ const HowItWorks = () => {
             <div>
               <img src="/arrow.svg" />
             </div>
-            <div className="border-dashed border p-5">
+            <div className="border-dashed border p-5 bg-gray-300">
               <p className="text-black font-normal text-base">
                 Our file sharing system simplifies the process with ease. Select
                 your desired file, and our system will generate a secure and

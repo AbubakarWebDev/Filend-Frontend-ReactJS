@@ -11,7 +11,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Row className="p-4 mx-0" style={{ backgroundColor: "#dcdcdc" }}>
+      <Row className="p-4 mx-0" style={{ backgroundColor: "#dcdcdc", minHeight: "calc(100vh - 57px)" }}>
         <Col xl={4} className="ps-xl-0">
           <ProfilePictureCard avatar={`${import.meta.env.VITE_SERVER_BASE_URL}/${user.avatar}`} />
         </Col>

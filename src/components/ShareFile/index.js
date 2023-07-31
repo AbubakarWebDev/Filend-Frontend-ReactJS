@@ -25,13 +25,13 @@ const ShareFile = ({ file, handleCopyToClipboard, showToast, link }) => {
   const inputRef = useRef(null);
   
   return (
-    <div className="relative p-5 flex flex-col lg:w-2/5 h-full rounded-md bg-white shadow-md">
+    <div className="relative p-5 flex flex-col w-full h-full rounded-md bg-white shadow-md">
       <div className="absolute -right-4 -top-4 bg-white w-9 h-9 rounded-full border border-gray-700 p-0 m-0">
-        <RiCloseCircleFill className="cursor-pointer w-full h-full" />
+        <RiCloseCircleFill className="cursor-pointer w-full h-full" color="black" />
       </div>
 
       <div className="mb-2">
-        <h1 className="text-base font-medium">{file.name}</h1>
+        <h1 className="text-base font-medium break-words text-black">{file.name}</h1>
       </div>
 
       <div className="flex justify-between mb-4">
@@ -40,7 +40,7 @@ const ShareFile = ({ file, handleCopyToClipboard, showToast, link }) => {
           type="text"
           value={link}
           ref={inputRef}
-          className={`${linkInput} w-11/12 border-b-4 border-btn-primary focus:outline-0`}
+          className={`${linkInput} w-11/12 border-b-4 border-btn-primary focus:outline-0 text-black`}
         />
 
         <HiOutlineClipboard
@@ -50,10 +50,10 @@ const ShareFile = ({ file, handleCopyToClipboard, showToast, link }) => {
         />
       </div>
 
-      <div className="flex justify-between items-center">
-        <QRCode className="w-2/5 h-auto" value={link} />
+      <div className="flex lg:flex-row flex-col lg:justify-around justify-center items-center">
+        <QRCode className="lg:w-2/5 w-full h-auto" value={link} />
 
-        <div className="w-1/2 flex flex-col">
+        <div className="lg:w-3/5 w-full lg:mt-0 mt-2 flex items-center flex-col">
           <div className="flex">
             <WhatsappShareButton url={link} title={"Filend"} separator=":: ">
               <BsWhatsapp

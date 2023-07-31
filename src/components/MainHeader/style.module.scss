@@ -8,11 +8,11 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #a7a7a7;
+    color: white;
 
     .appName {
-        color: black;
         margin-bottom: 0;
-        font-family: "Poppins", serif;
+        font-family: "Oswald", serif;
         font-weight: bolder;
         font-size: 18px;
         text-transform: uppercase;
@@ -20,13 +20,13 @@
 
     .menuItems {
         a {
-            color: black;
+            color: white;
             text-decoration: none;
-            font-family: "Poppins", serif;
-            font-weight: 600;
+            font-family: "Oswald", serif;
+            font-weight: 900;
             font-size: 20px;
             padding: 0 12px;
-            text-transform: capitalize;
+            text-transform: uppercase;
         }
     }
 

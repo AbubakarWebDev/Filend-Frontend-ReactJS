@@ -32,7 +32,7 @@ const UploadFile = ({ handleUpload }) => {
       onDrop={onDrop}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
-      className="p-5 lg:w-2/5 rounded-md bg-gray shadow-md border"
+      className="p-5 w-full rounded-md bg-gray shadow-md border"
     >
       <div
         className={`${dragOver ? "bg-yellow-300" : ""} group h-full flex justify-center items-center py-20 border hover:border-black border-dashed hover:bg-white cursor-pointer`}

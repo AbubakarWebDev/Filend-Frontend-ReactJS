@@ -124,7 +124,7 @@ const ReceiverFileContainer = ({ roomID }) => {
 
 
   return (
-    <div className="p-5 lg:w-2/5 min-h-[320px] flex text-center items-center justify-center rounded-md bg-white shadow-md">
+    <div className="p-5 w-full min-h-[330px] flex text-black text-center items-center justify-center rounded-md bg-white shadow-md">
       {(connectionEstablished && gotFile) ? (
         <FileProgress percentage={progressPercentage.toFixed()} />
       ) : (invalidConnection && !connectionEstablished) ? (
