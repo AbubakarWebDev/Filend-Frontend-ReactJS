@@ -19,7 +19,7 @@ const Hero = () => {
           {roomID ? <ReceiverFileContainer roomID={roomID} /> : <SenderFileContainer />}
         </div>
       </div>
-      <img src={waveImg} alt="Image" className="w-full"></img>
+      <img src={waveImg} alt="Image" className="w-full" />
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import styles from "./style.module.scss";
 const { header, menuItems, userDropdown, userDropdownList, loginBtn } = styles;
 
 function MainHeader() {
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -20,6 +21,18 @@ function MainHeader() {
     dispatch(authActions.logout());
     navigate("/login", { replace: true });
   }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (e) => {
+      const el = dropdownRef?.current
+
+      if (!el || el.contains(e.target)) {
+        return;
+      }
+
+      el.style.display = "none";
+    });
+  }, []);
 
   return (
     <div
@@ -48,7 +61,7 @@ function MainHeader() {
           <BiSolidDownArrow style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} />
 
           {dropdown && (
-            <div className={userDropdownList}>
+            <div ref={dropdownRef} className={userDropdownList}>
               <Link to="/profile">Profile</Link>
               <button type="button" onClick={handleLogout}>
                 Logout
