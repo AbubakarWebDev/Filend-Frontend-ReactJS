@@ -146,8 +146,8 @@ function SignupForm() {
                     <input
                         id={elem.name}
                         type={elem.type}
-                        className="form-control form-control-lg"
                         placeholder={elem.placeholder}
+                        className="form-control form-control-lg"
                         {...register(elem.name)}
                     />
                     

@@ -8,10 +8,9 @@ import {
     updateGroupUsers as groupUsers,
     updateGroupAdmins as groupAdmins,
     renameGroupName as renameGroup,
-    removeUserFromGroup as removeGroupUser
+    removeUserFromGroup as removeGroupUser,
+    updateGroupIcon as groupIcon
 } from "../../services/chat.service";
-
-import { changeObjectPosition } from '../../utils';
 
 import { sendMessage, messageActions, updateReadBy } from "./messageSlice";
 
@@ -97,6 +96,18 @@ const removeUserFromGroup = createAsyncThunk('chat/removeUserFromGroup', async (
     }
 });
 
+const updateGroupIcon = createAsyncThunk('chat/updateGroupIcon', async (payload, thunkAPI) => {
+    try {
+        thunkAPI.dispatch(chatSlice.actions.setError(null));
+
+        const response = await groupIcon(payload, thunkAPI.signal);
+        return response.data.result.chat;
+    }
+    catch (err) {
+        return thunkAPI.rejectWithValue(handleAPIError(err));
+    }
+});
+
 const initialState = {
     error: null,
     chats: null,
@@ -111,16 +122,16 @@ var chatSlice = createSlice({
         setError: function (state, action) {
             state.error = action.payload;
         },
-        
+
         setActiveChat: function (state, action) {
             state.activeChat = action.payload;
         },
-        
+
         pushNewChat: function (state, action) {
             const chatIndex = state.chats.findIndex(chat => chat._id === action.payload._id);
             if (chatIndex === -1) state.chats.unshift(action.payload);
         },
-        
+
         updateChat: function (state, action) {
             const chatIndex = state.chats.findIndex(chat => chat._id === action.payload._id);
             if (chatIndex !== -1) state.chats[chatIndex] = action.payload;
@@ -130,12 +141,12 @@ var chatSlice = createSlice({
             }
         },
 
-        deleteChat: function(state, action) {
+        deleteChat: function (state, action) {
             const chatIndex = state.chats.findIndex(chat => chat._id === action.payload);
 
             if (chatIndex !== -1) {
-                state.chats.splice(chatIndex, 1);                
-                
+                state.chats.splice(chatIndex, 1);
+
                 if (state.activeChat && (state.activeChat._id === action.payload)) {
                     state.activeChat = null;
                 }
@@ -247,7 +258,7 @@ var chatSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-
+        
             // Register Reducers for "removeGroupUser" action
             .addCase(removeUserFromGroup.pending, (state) => {
                 state.error = null;
@@ -265,6 +276,24 @@ var chatSlice = createSlice({
                 state.error = action.payload;
             })
 
+            // Register Reducers for "updateGroupIcon" action
+            .addCase(updateGroupIcon.pending, (state) => {
+                state.error = null;
+                state.loading = true;
+            })
+            .addCase(updateGroupIcon.fulfilled, (state, action) => {
+                state.error = null;
+                state.loading = false;
+                state.activeChat.groupIcon = action.payload.groupIcon;
+
+                const chat = state.chats.find(chat => chat._id === action.payload._id);
+                chat.groupIcon = action.payload.groupIcon;
+            })
+            .addCase(updateGroupIcon.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
             // Update the latest message of an active chat when we send a message
             .addCase(sendMessage.fulfilled, (state, action) => {
                 const chatIndex = state.chats.findIndex(chat => chat._id === action.payload.chat._id);
@@ -273,7 +302,7 @@ var chatSlice = createSlice({
                 if (state.activeChat && (action.payload.chat._id === state.activeChat._id)) {
                     state.activeChat.latestMessage = action.payload;
                 }
-                
+
                 if (chatIndex !== 0) {
                     state.chats.unshift(state.chats.splice(chatIndex, 1)[0]);
                 }
@@ -299,12 +328,12 @@ var chatSlice = createSlice({
                 const chatIndex = state.chats.findIndex(chat => chat._id === action.payload.chat._id);
                 state.chats[chatIndex].unReadCount = state.chats[chatIndex].unReadCount - 1;
                 state.activeChat.unReadCount = state.activeChat.unReadCount - 1;
-                
+
                 if (chatIndex !== 0) {
                     state.chats.unshift(state.chats.splice(chatIndex, 1)[0]);
                 }
             });
-},
+    },
 });
 
 const chatReducer = chatSlice.reducer;
@@ -318,6 +347,7 @@ export {
     createGroupChat,
     updateGroupUsers,
     getorCreateChats,
+    updateGroupIcon,
     updateGroupAdmins,
     removeUserFromGroup
 };

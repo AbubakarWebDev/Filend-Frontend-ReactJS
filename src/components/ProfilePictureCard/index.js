@@ -93,7 +93,13 @@ function ProfilePictureCard({ avatar }) {
 
                 <div className="small font-italic text-muted mb-3"> JPG or PNG no larger than 2 MB </div>
 
-                <Button variant="primary" type="button" onClick={updateProfile}> Update Profile Avatar </Button>
+                <Button 
+                    type="button"
+                    variant="primary"
+                    onClick={updateProfile}
+                > 
+                    Update Profile Avatar 
+                </Button>
 
                 {loading && <RequestLoader />}
             </Card.Body>

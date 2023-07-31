@@ -13,11 +13,12 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
-    updateGroupAdmins,
-    updateGroupUsers,
+    chatActions,
     renameGroupName,
-    removeUserFromGroup,
-    chatActions
+    updateGroupUsers,
+    updateGroupAdmins,
+    updateGroupIcon,
+    removeUserFromGroup
 } from "../../store/slices/chatSlice";
 import { homePageActions } from '../../store/slices/homePageSlice';
 import { getSender, capatalize, isEqualArrayOfObject, findArrayDiff } from '../../utils';
@@ -27,6 +28,7 @@ const { chatRoomContainer, chatIcon, toggleBtn } = styles;
 
 function ChatRoom({ user, onlineUsers }, ref) {
     const controllers = useRef([
+        () => { },
         () => { },
         () => { },
         () => { },
@@ -55,6 +57,18 @@ function ChatRoom({ user, onlineUsers }, ref) {
             updatedChat = await promise.unwrap();
         }
 
+        if (typeof formData.groupIcon == 'object') {
+            const payload = {
+                chatId: chat._id,
+                groupIcon: formData.groupIcon[0]
+            }
+
+            const promise = dispatch(updateGroupIcon(payload));
+            controllers.current[1] = promise.abort;
+
+            updatedChat = await promise.unwrap();
+        }
+
         var isGroupAdmin = chat.groupAdmins.some(groupAdmin => groupAdmin._id === user._id);
 
         if (chat.isGroupChat && isGroupAdmin) {
@@ -65,7 +79,7 @@ function ChatRoom({ user, onlineUsers }, ref) {
                 };
 
                 const promise = dispatch(updateGroupUsers(payload));
-                controllers.current[1] = promise.abort;
+                controllers.current[2] = promise.abort;
 
                 updatedChat = await promise.unwrap();
             }
@@ -77,7 +91,7 @@ function ChatRoom({ user, onlineUsers }, ref) {
                 };
 
                 const promise = dispatch(updateGroupAdmins(payload));
-                controllers.current[2] = promise.abort;
+                controllers.current[3] = promise.abort;
 
                 updatedChat = await promise.unwrap();
             }
@@ -91,9 +105,6 @@ function ChatRoom({ user, onlineUsers }, ref) {
                 ...updatedChat.users, 
                 ...updatedChat.groupAdmins
             ]);
-
-            console.log(chat, updatedChat);
-            console.log(addedEntries, removedEntries);
 
             emit(socket, "updateGroupChat", { 
                 userId: user._id,
@@ -133,7 +144,7 @@ function ChatRoom({ user, onlineUsers }, ref) {
             }
 
             const promise = dispatch(removeUserFromGroup(payload));
-            controllers.current[3] = promise.abort;
+            controllers.current[4] = promise.abort;
 
             promise.unwrap().then((updatedChat) => {
                 setOpenModal(false);
