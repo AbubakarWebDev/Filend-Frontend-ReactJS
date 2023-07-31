@@ -107,9 +107,12 @@ function ChatRoom({ user, onlineUsers }, ref) {
             toast.error('Error: Unable to leave the group. As the sole admin, you must first assign another user as an admin before leaving');
         }
         else {
+            var isGroupAdmin = chat.groupAdmins.some(groupAdmin => groupAdmin._id === user._id);
+
             const payload = {
                 userId: user._id,
                 chatId: chat._id,
+                userType: isGroupAdmin ? "groupAdmin" : "groupUser",
             }
 
             const promise = dispatch(removeUserFromGroup(payload));
