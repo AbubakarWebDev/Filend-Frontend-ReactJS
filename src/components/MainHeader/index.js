@@ -12,10 +12,9 @@ function MainHeader() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const user = useSelector((state) => state.user.user);
-  const [dropdown, setDropdown] = useState(false);
 
-  console.log(pathname);
+  const [dropdown, setDropdown] = useState(false);
+  const user = useSelector((state) => state.user.user);
 
   function handleLogout() {
     dispatch(authActions.logout());

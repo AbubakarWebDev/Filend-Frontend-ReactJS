@@ -31,6 +31,7 @@ function ChatRoom({ user, onlineUsers }, ref) {
         () => { },
         () => { },
         () => { },
+        () => { },
     ]);
 
     const [openModal, setOpenModal] = useState(false);
@@ -91,6 +92,9 @@ function ChatRoom({ user, onlineUsers }, ref) {
                 ...updatedChat.groupAdmins
             ]);
 
+            console.log(chat, updatedChat);
+            console.log(addedEntries, removedEntries);
+
             emit(socket, "updateGroupChat", { 
                 userId: user._id,
                 chat: updatedChat,
@@ -108,11 +112,24 @@ function ChatRoom({ user, onlineUsers }, ref) {
         }
         else {
             var isGroupAdmin = chat.groupAdmins.some(groupAdmin => groupAdmin._id === user._id);
+            var isGroupMember = chat.users.some(groupUser => groupUser._id === user._id);
+
+            if (isGroupAdmin) {
+                var userType = "groupAdmin";
+            }
+            
+            if (isGroupMember) {
+                userType = "groupUser";
+            }
+
+            if (isGroupAdmin && isGroupMember) {
+                userType = "both";
+            }
 
             const payload = {
                 userId: user._id,
                 chatId: chat._id,
-                userType: isGroupAdmin ? "groupAdmin" : "groupUser",
+                userType
             }
 
             const promise = dispatch(removeUserFromGroup(payload));
@@ -123,10 +140,10 @@ function ChatRoom({ user, onlineUsers }, ref) {
                 dispatch(chatActions.setActiveChat(null));
 
                 const { addedEntries, removedEntries } = findArrayDiff([
-                    ...chat.users, 
+                    ...chat.users,
                     ...chat.groupAdmins
                 ], [
-                    ...updatedChat.users, 
+                    ...updatedChat.users,
                     ...updatedChat.groupAdmins
                 ]);
 

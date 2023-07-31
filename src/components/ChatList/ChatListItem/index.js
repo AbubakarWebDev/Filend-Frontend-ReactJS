@@ -12,7 +12,7 @@ function ChatListItem({
     unReadCount,
     lastMsgText, 
     lastMsgTime, 
-    handleClick
+    handleClick = () => {}
 }) {
     return (
         <div 
