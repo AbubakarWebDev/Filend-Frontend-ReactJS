@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 
 const Intro = ({ receiver }) => {
   return (
@@ -15,9 +15,13 @@ const Intro = ({ receiver }) => {
       </p>
 
       <div className="flex">
-        <NavLink className="p-3 text-base font-bold rounded-md bg-[#E18A07] hover:bg-btn-secondry text-white">
+        <Link
+          className="p-3 text-base font-bold rounded-md bg-[#E18A07] hover:bg-btn-secondry text-white"
+          to="#features"
+          smooth
+        >
           Read More
-        </NavLink>
+        </Link>
       </div>
     </>
   );

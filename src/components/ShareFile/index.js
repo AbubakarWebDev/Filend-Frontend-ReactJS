@@ -21,17 +21,29 @@ import {
 import styles from "./style.module.scss";
 const { linkInput } = styles;
 
-const ShareFile = ({ file, handleCopyToClipboard, showToast, link }) => {
+const ShareFile = ({
+  file,
+  handleCopyToClipboard,
+  showToast,
+  link,
+  stopSharing,
+}) => {
   const inputRef = useRef(null);
-  
+
   return (
     <div className="relative p-5 flex flex-col w-full h-full rounded-md bg-white shadow-md">
       <div className="absolute -right-4 -top-4 bg-white w-9 h-9 rounded-full border border-gray-700 p-0 m-0">
-        <RiCloseCircleFill className="cursor-pointer w-full h-full" color="black" />
+        <RiCloseCircleFill
+          className="cursor-pointer w-full h-full"
+          color="black"
+          onClick={stopSharing}
+        />
       </div>
 
       <div className="mb-2">
-        <h1 className="text-base font-medium break-words text-black">{file.name}</h1>
+        <h1 className="text-base font-medium break-words text-black">
+          {file.name}
+        </h1>
       </div>
 
       <div className="flex justify-between mb-4">

@@ -1,16 +1,16 @@
 import { useState, useRef } from "react";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 
 import Peer from "simple-peer";
 import { v1 as uuid } from "uuid";
 
 import ShareFile from "../ShareFile";
 import UploadFile from "../UploadFile";
-import FileProgress from './../FileProgress';
+import FileProgress from "./../FileProgress";
 
 import { webRTCSocket as socket, emit } from "../../socket";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "./style.scss"
+import "./style.scss";
 
 const SenderFileContainer = () => {
   const peerRef = useRef();
@@ -18,6 +18,15 @@ const SenderFileContainer = () => {
   const [showToast, setShowToast] = useState(false);
   const [isLinkGenerated, setIsLinkGenerated] = useState(false);
   const [progressPercentage, setProgressPercentage] = useState({});
+
+  const stopSharing = () => {
+    const confirmation = window.confirm(`Changes you made may not be saved.`);
+
+    if (confirmation) {
+      window.location.reload();
+      // setFile(undefined);
+    }
+  };
 
   function sendFile(file, callerID) {
     // Get the reference to the peer object
@@ -32,13 +41,13 @@ const SenderFileContainer = () => {
     // getting the size of the file
     const totalFileSize = file.size;
 
-    emit(socket, 'sending_file_MetaData', {
+    emit(socket, "sending_file_MetaData", {
       userToSignal: callerID,
       callerID: socket.id,
       metaData: {
         fileSize: totalFileSize,
-        fileName: file.name
-      }
+        fileName: file.name,
+      },
     });
 
     function readNextChunk() {
@@ -63,7 +72,7 @@ const SenderFileContainer = () => {
         setProgressPercentage((prev) => {
           return {
             ...prev,
-            [peer.channelName]: (totalSentBytes / totalFileSize) * 100
+            [peer.channelName]: (totalSentBytes / totalFileSize) * 100,
           };
         });
 
@@ -71,8 +80,7 @@ const SenderFileContainer = () => {
         if (totalSentBytes < totalFileSize) {
           totalSentBytes = endingByte;
           readNextChunk();
-        }
-        else {
+        } else {
           // If the last chunk has been sent, send the "done" message
           peer.write(JSON.stringify({ webRTCFileDone: true }));
           return;
@@ -83,7 +91,7 @@ const SenderFileContainer = () => {
     socket.on("peer_successfully_store_file_MetaData", () => {
       // Start reading and sending the file in chunks
       readNextChunk();
-    })
+    });
   }
 
   function createPeer(userToSignal, callerID) {
@@ -121,26 +129,26 @@ const SenderFileContainer = () => {
     function onReceiving_SDP_Answer(payload) {
       peerRef.current.signal(payload.signal);
 
-      peerRef.current.on('connect', () => {
-        console.log('Connected to peer!');
+      peerRef.current.on("connect", () => {
+        console.log("Connected to peer!");
 
         setProgressPercentage((prev) => {
           return {
             ...prev,
-            [peerRef.current.channelName]: 0
+            [peerRef.current.channelName]: 0,
           };
         });
 
         sendFile(file, payload.callerID);
       });
 
-      peerRef.current.on('close', () => {
-        console.log('Disconnected to peer!');
+      peerRef.current.on("close", () => {
+        console.log("Disconnected to peer!");
       });
 
-      peerRef.current.on('error', (err) => {
-        if (err.code === 'ERR_CONNECTION_FAILURE') {
-          console.log('Disconnected to peer!');
+      peerRef.current.on("error", (err) => {
+        if (err.code === "ERR_CONNECTION_FAILURE") {
+          console.log("Disconnected to peer!");
         }
       });
     }
@@ -169,14 +177,21 @@ const SenderFileContainer = () => {
   if (Object.values(progressPercentage).length > 0) {
     return (
       <div className="p-5 w-full min-h-[330px] flex text-center items-center justify-center rounded-md bg-white shadow-md">
-        {(Object.values(progressPercentage).length > 1) ? (
-          <Carousel showIndicators={true} showThumbs={false} showStatus={false} showArrows={false}>
+        {Object.values(progressPercentage).length > 1 ? (
+          <Carousel
+            showIndicators={true}
+            showThumbs={false}
+            showStatus={false}
+            showArrows={false}
+          >
             {Object.values(progressPercentage).map((percentage, index) => (
               <FileProgress key={index} percentage={percentage.toFixed()} />
             ))}
           </Carousel>
         ) : (
-          <FileProgress percentage={Object.values(progressPercentage)[0].toFixed()} />
+          <FileProgress
+            percentage={Object.values(progressPercentage)[0].toFixed()}
+          />
         )}
       </div>
     );
@@ -184,17 +199,16 @@ const SenderFileContainer = () => {
 
   return (
     <>
-      {(file && isLinkGenerated) ? (
+      {file && isLinkGenerated ? (
         <ShareFile
           file={file}
           showToast={showToast}
           link={isLinkGenerated}
+          stopSharing={stopSharing}
           handleCopyToClipboard={handleCopyToClipboard}
         />
       ) : (
-        <UploadFile
-          handleUpload={handleUpload}
-        />
+        <UploadFile handleUpload={handleUpload} />
       )}
     </>
   );
