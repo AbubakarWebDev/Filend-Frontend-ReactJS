@@ -34,9 +34,13 @@ const VideoMeeting = () => {
           className="container mx-auto flex md:flex-row flex-col items-center"
         >
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 mt-5 md:mb-0 items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Knausgaard typewriter readymade marfa</h1>
-            
-            <p className="mb-8 leading-relaxed">Chillwave portland ugh, knausgaard fam polaroid iPhone. Man braid swag typewriter affogato, hella selvage wolf narwhal dreamcatcher.</p>
+            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+              High-quality video conferences.
+              <br />
+              Now accessible to all.
+            </h1>
+
+            <p className="mb-8 leading-relaxed">Reimagining Video Conferencing: Introducing Our Secure Business Meetings App, Now Free and Available for All.</p>
 
             <form
               onSubmit={handleSubmit}
@@ -66,10 +70,10 @@ const VideoMeeting = () => {
             </form>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img 
-              src={HomePageGraphic} 
-              alt="Home-Page-Graphic" 
-              className="object-cover object-center rounded" 
+            <img
+              src={HomePageGraphic}
+              alt="Home-Page-Graphic"
+              className="object-cover object-center rounded"
             />
           </div>
         </div>
