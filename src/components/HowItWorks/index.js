@@ -35,10 +35,11 @@ const HowItWorks = () => {
                 unique link for it. Share this link effortlessly on various
                 platforms, allowing recipients to access and download the file
                 with just a click. Enjoy fast, reliable downloads, and rest
-                assured that your data is safe with top-notch encryption. There is
-                no need to worry about link expirations, as the shared links
-                remain accessible indefinitely. Experience seamless collaboration
-                and efficient file sharing with our user-friendly platform today.
+                assured that your data is safe with top-notch encryption. There
+                is no need to worry about link expirations, as the shared links
+                remain accessible indefinitely. Experience seamless
+                collaboration and efficient file sharing with our user-friendly
+                platform today.
               </p>
               <ul className="text-base font-medium mt-4">
                 <li className="my-2">
@@ -87,4 +88,37 @@ const HowItWorks = () => {
     </h1>
   );
 };
+
+// import working from "../../assets/images/2.png";
+
+// const HowItWorks = () => {
+//   return (
+//     <section className="body-font mb-10">
+//       <div className="container mx-auto flex px-5  md:flex-row flex-col items-center">
+//         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+//           {/* <Intro receiver={roomID ? true : false} /> */}
+//           <h2 className="max-w-lg mb-6 text-3xl font-bold  sm:text-4xl sm:leading-none ">
+//             Receiving Your File With Our Filend Application
+//           </h2>
+
+//           <p className="text-base md:text-lg mb-6">
+//             Our file sharing system simplifies the process with ease. Select
+//             your desired file, and our system will generate a secure and unique
+//             link for it. Share this link effortlessly on various platforms,
+//             allowing recipients to access and download the file with just a
+//             click. Enjoy fast, reliable downloads, and rest assured that your
+//             data is safe with top-notch encryption. There is no need to worry
+//             about link expirations, as the shared links remain accessible
+//             indefinitely. Experience seamless collaboration and efficient file
+//             sharing with our user-friendly platform.
+//           </p>
+//         </div>
+//         <div className="lg:max-w-lg lg:w-full h-full md:w-1/2 w-5/6">
+//           <img src={working} alt="Image" className="w-full h-full" />
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
 export default HowItWorks;

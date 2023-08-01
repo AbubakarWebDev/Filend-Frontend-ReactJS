@@ -10,19 +10,22 @@ const ServicesSection = () => {
       id: 1,
       Icon: BiShareAlt,
       title: "File Sharing",
-      description: "Effortlessly share files of any size with others through secure and reliable links."
+      description:
+        "Enable secure and reliable file sharing with seamless links for effortless collaboration.",
     },
     {
       id: 2,
       Icon: BiVideo,
       title: "Video Meeting",
-      description: "Conduct video conferences with seamless audio and video quality for effective collaboration.",
+      description:
+        "Conduct video conferences with seamless audio and video quality for effective collaboration.",
     },
     {
       id: 3,
       title: "Chat",
       Icon: BsFillChatDotsFill,
-      description: "Stay connected and chat with your team members in a secure and real-time environment.",
+      description:
+        "Stay connected and chat with your team members in a secure and real-time environment.",
     },
   ];
 
@@ -40,7 +43,9 @@ const ServicesSection = () => {
         </div>
 
         <div className="-mx-4 flex flex-wrap">
-          {services.map((service) => <ServiceItem key={service.id} {...service} />)}
+          {services.map((service) => (
+            <ServiceItem key={service.id} {...service} />
+          ))}
         </div>
       </div>
     </section>
