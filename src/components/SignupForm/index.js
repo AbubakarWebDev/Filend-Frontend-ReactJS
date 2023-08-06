@@ -148,7 +148,7 @@ function SignupForm() {
                         type={elem.type}
                         placeholder={elem.placeholder}
                         className="form-control form-control-lg"
-                        {...register(elem.name)}
+                        {...register(elem.name, { setValueAs: v => v.trim() })}
                     />
                     
                     {(elem.type !== "file") && (<label htmlFor={elem.name}> { elem.label } </label>)}

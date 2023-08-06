@@ -4,7 +4,6 @@ import { BiVideoPlus } from "react-icons/bi";
 import { BsFillKeyboardFill } from "react-icons/bs";
 
 import Modal from "../components/Modal";
-import VideoNav from "../components/VideoNav";
 
 import HomePageGraphic from "../assets/images/animation.gif";
 import SiteLayout from "../layouts/SiteLayout";

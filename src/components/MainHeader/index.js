@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
+import { BsPersonVideo2, BsFillChatRightTextFill, BsFillFileEarmarkArrowDownFill } from "react-icons/bs";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,10 +9,31 @@ import { authActions } from "../../store/slices/authSlice";
 import styles from "./style.module.scss";
 const { header, menuItems, userDropdown, userDropdownList, loginBtn } = styles;
 
+const navMenuItems = [
+  {
+    id: 1,
+    route: "/",
+    title: "Filend",
+    Icon: BsFillFileEarmarkArrowDownFill
+  },
+  {
+    id: 2,
+    route: "/chat",
+    title: "Chat Me Up",
+    Icon: BsFillChatRightTextFill
+  },
+  {
+    id: 3,
+    route: "/video-meeting",
+    title: "Meet Me Up",
+    Icon: BsPersonVideo2
+  },
+];
+
 function MainHeader() {
-  const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const dropdownRef = useRef(null);
   const { pathname } = useLocation();
 
   const [dropdown, setDropdown] = useState(false);
@@ -24,7 +46,7 @@ function MainHeader() {
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
-      const el = dropdownRef?.current
+      const el = dropdownRef?.current;
 
       if (!el || el.contains(e.target)) {
         return;
@@ -38,15 +60,28 @@ function MainHeader() {
     <div
       className={header}
       style={{
-        background: (pathname === "/" || pathname.includes("/room"))
-          ? "linear-gradient(to right, #a517ba, #5f1782)"
-          : "rgba(227, 202, 254, 0.9)"
+        background:
+          pathname === "/" || pathname.includes("/room")
+            ? "linear-gradient(to right, #a517ba, #5f1782)"
+            : "rgba(227, 202, 254, 0.9)",
       }}
     >
       <div className={menuItems}>
-        <Link style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} to="/">Filend</Link>
-        <Link style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} to="/chat">Chat Me Up</Link>
-        <Link style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} to="/video-meeting">Meet Me Up</Link>
+        {navMenuItems.map(({ id, route, Icon, title }) => (
+          <Link
+            key={id}
+            style={{
+              color:
+                pathname === "/" || pathname.includes("/room")
+                  ? "white"
+                  : "black",
+            }}
+            to={route}
+          >
+            <Icon className="mr-2" />
+            { title }
+          </Link>
+        ))}
       </div>
 
       {user ? (
@@ -58,7 +93,14 @@ function MainHeader() {
             alt="User Profile"
             src={`${import.meta.env.VITE_SERVER_BASE_URL}/${user.avatar}`}
           />
-          <BiSolidDownArrow style={{ color: (pathname === "/" || pathname.includes("/room")) ? "white" : "black" }} />
+          <BiSolidDownArrow
+            style={{
+              color:
+                pathname === "/" || pathname.includes("/room")
+                  ? "white"
+                  : "black",
+            }}
+          />
 
           {dropdown && (
             <div ref={dropdownRef} className={userDropdownList}>

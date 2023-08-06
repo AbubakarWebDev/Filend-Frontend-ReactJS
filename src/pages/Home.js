@@ -1,9 +1,9 @@
 import Hero from "../components/Hero";
-import Benifits from "../components/Benifits";
+import Benefits from "../components/Benefits";
 import Features from "../components/Features";
+import SiteLayout from "../layouts/SiteLayout";
 import HowItWorks from "../components/HowItWorks";
 import Services from "../components/ServicesSection";
-import SiteLayout from "../layouts/SiteLayout";
 
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
       <HowItWorks />
       <Services />
       <Features />
-      <Benifits />
+      <Benefits />
     </section>
   );
 };

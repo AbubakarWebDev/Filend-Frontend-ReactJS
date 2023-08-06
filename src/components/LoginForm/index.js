@@ -41,7 +41,7 @@ const schema = yup.object().shape({
 function LoginForm() {
   const navigate = useNavigate();
   const timeoutId = useRef(null);
-  const controller = useRef({ abort: () => {} });
+  const controller = useRef({ abort: () => { } });
   const [showAlert, setShowAlert] = useState(false);
 
   const {
@@ -95,25 +95,27 @@ function LoginForm() {
         </Alert>
       )}
 
-      {inpElem.map((elem) => (
-        <div key={elem.id} className="mb-3 form-floating">
-          <input
-            id={elem.name}
-            type={elem.type}
-            className="form-control"
-            placeholder={elem.placeholder}
-            {...register(elem.name)}
-          />
+      {inpElem.map((elem) => {
+        return (
+          <div key={elem.id} className="mb-3 form-floating">
+            <input
+              id={elem.name}
+              type={elem.type}
+              className="form-control"
+              placeholder={elem.placeholder}
+              {...register(elem.name, { setValueAs: v => v.trim() })}
+            />
 
-          <label htmlFor={elem.name}> {elem.label} </label>
+            <label htmlFor={elem.name}> {elem.label} </label>
 
-          {errors[elem.name] && (
-            <b className="text-danger d-block mt-1">
-              {errors[elem.name].message}
-            </b>
-          )}
-        </div>
-      ))}
+            {errors[elem.name] && (
+              <b className="text-danger d-block mt-1">
+                {errors[elem.name].message}
+              </b>
+            )}
+          </div>
+        )
+      })}
 
       <button
         type="submit"
