@@ -2,7 +2,6 @@
 
 Welcome to the Filend Frontend ReactJS repository! This repository houses three powerful applications built with ReactJS that cater to various communication needs:
 
-<br />
 
 1. <b>Filend</b> - Experience seamless WebRTC-based file sharing, enabling you to effortlessly share files in real-time.
 
@@ -10,16 +9,13 @@ Welcome to the Filend Frontend ReactJS repository! This repository houses three 
 
 3. <b>Meet Me Up</b> - Embrace virtual meetings with Meet Me Up, a Google Meet Clone that brings high-quality video conferencing and collaboration to your fingertips.
 
-<br />
 
 Get started with these cutting-edge applications and enhance your communication experience today!
 
-<br />
 
 ## Related Repositories
 - [Filend Backend NodeJS](https://github.com/AbubakarWebDev/Filend-Backend-NodeJS): This repository holds the backend signaling server code, and also chat application socket code that integrates with this frontend application. For a complete understanding and to see our WebRTC implementation in action, be sure to check out the backend repo as well.
 
-<br />
 
 ## Getting Started
 
@@ -68,13 +64,11 @@ Please ensure that you **do not** commit your `.env` files to version control, a
 
 By customizing your `.env` files, you can configure the applications to work with your specific environment, enabling seamless operation.
 
-<br />
 
 ## Contribution
 
 Please feel free to contribute to this open-source project, report issues, and suggest improvements. Let's make file sharing smarter and more convenient together!
 
-<br />
 
 ## License
 
