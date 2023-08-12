@@ -7,3 +7,11 @@ Welcome to the Filend Frontend ReactJS repository! This repository houses three 
 3. Meet Me Up - Embrace virtual meetings with Meet Me Up, a Google Meet Clone that brings high-quality video conferencing and collaboration to your fingertips.
 
 Get started with these cutting-edge applications and enhance your communication experience today!
+
+## Contribution
+
+Please feel free to contribute to this open-source project, report issues, and suggest improvements. Let's make file sharing smarter and more convenient together!
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
