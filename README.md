@@ -1,8 +1,9 @@
-# React + Vite
+# Filend Frontend ReactJS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Filend Frontend ReactJS repository! This repository houses three powerful applications built with ReactJS that cater to various communication needs:
 
-Currently, two official plugins are available:
+1. Filend - Experience seamless WebRTC-based file sharing, enabling you to effortlessly share files in real-time.
+2. Chat Me Up - Engage in real-time communication with Chat Me Up, a dynamic chat application featuring WebSocket technology for both one-on-one and group conversations.
+3. Meet Me Up - Embrace virtual meetings with Meet Me Up, a Google Meet Clone that brings high-quality video conferencing and collaboration to your fingertips.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Get started with these cutting-edge applications and enhance your communication experience today!
